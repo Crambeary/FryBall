@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhnewkhut1ghs"]
+
+[ext_resource type="Shader" uid="uid://ckjwawyta4l3o" path="res://fry_ball.gdshader" id="1_dta7x"]
+[ext_resource type="Texture2D" uid="uid://dmv2ikvov2fgl" path="res://white-pixel.png" id="1_n74j8"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ynro5"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 6.73
+emission_ring_radius = 27.14
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 80.24
+angular_velocity_min = -240.00002
+angular_velocity_max = -240.00002
+orbit_velocity_min = 0.0740001
+orbit_velocity_max = 0.3210001
+gravity = Vector3(0, 0, 0)
+damping_min = 68.731
+damping_max = 100.00001
+turbulence_influence_max = 0.537
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kknwj"]
+shader = ExtResource("1_dta7x")
+shader_parameter/radius = 80.0
+shader_parameter/edge_softness = 12.0
+shader_parameter/edge_power = 1.6
+shader_parameter/bumpiness_amplitude = 6.0
+shader_parameter/bumpiness_scale = 9.0
+shader_parameter/bumpiness_warp = 0.65
+shader_parameter/fry_noise_scale = 4.5
+shader_parameter/fry_fbm_gain = 0.55
+shader_parameter/fry_warp_amount = 1.4
+shader_parameter/fry_warp_scale = 2.0
+shader_parameter/ridge_density = 20.0
+shader_parameter/ridge_strength = 0.45
+shader_parameter/crumb_strength = 0.35
+shader_parameter/normal_strength = 1.6
+shader_parameter/light_dir = Vector2(-0.45, -0.8)
+shader_parameter/specular_power = 24.0
+shader_parameter/ambient_strength = 0.24
+shader_parameter/bounce_strength = 0.18
+shader_parameter/rim_strength = 0.28
+shader_parameter/rim_power = 2.0
+shader_parameter/shadow_strength = 0.6
+shader_parameter/shadow_radius = 0.55
+shader_parameter/shadow_softness = 0.22
+shader_parameter/shadow_curve = 1.35
+shader_parameter/shadow_center = Vector2(-0.05, -0.1)
+shader_parameter/shadow_tint = Vector3(0.82, 0.78, 0.9)
+shader_parameter/terminator_dir = Vector2(0.6, 0.45)
+shader_parameter/terminator_softness = 0.12
+shader_parameter/terminator_offset = 0.0
+shader_parameter/terminator_strength = 0.9
+shader_parameter/terminator_contrast = 1.6
+shader_parameter/terminator_tint = Vector3(0.82, 0.78, 0.9)
+shader_parameter/base_color = Vector3(0.95, 0.82, 0.45)
+shader_parameter/shadow_color = Vector3(0.68, 0.52, 0.22)
+shader_parameter/crisp_color = Vector3(1, 0.93, 0.68)
+
+[node name="FryBall" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+amount = 148
+lifetime = 600.0
+preprocess = 10.0
+speed_scale = 0.28
+fixed_fps = 120
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ynro5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_kknwj")
+position = Vector2(1.1920929e-07, 1.1920929e-07)
+scale = Vector2(3.9999998, 3.9999998)
+texture = ExtResource("1_n74j8")
