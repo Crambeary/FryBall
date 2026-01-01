@@ -118,6 +118,16 @@ float fry_height(vec2 p) {
          + crumb_strength * (crumbs - 0.5);
 }
 
+float height_triplanar(vec3 p) {
+    vec3 w = abs(p);
+    w = max(w, vec3(1e-4));
+    w /= (w.x + w.y + w.z);
+    float hx = fry_height(p.yz);
+    float hy = fry_height(p.xz);
+    float hz = fry_height(p.xy);
+    return hx * w.x + hy * w.y + hz * w.z;
+}
+
 void vertex() {
     vec2 dir = normalize(VERTEX);
     vec2 p = (VERTEX / max(radius, 1.0)) * bumpiness_scale;
@@ -148,11 +158,13 @@ void fragment() {
     );
     edge = pow(edge, edge_power);
 
-    float height = fry_height(uv_tex);
+    vec3 sample_p = normalize(rotated_p); // on unit sphere for triplanar
+
+    float height = height_triplanar(sample_p);
     float shade = smoothstep(0.0, 1.0, dist);
 
-    float h_dx = fry_height(uv_tex + vec2(0.01, 0.0)) - fry_height(uv_tex - vec2(0.01, 0.0));
-    float h_dy = fry_height(uv_tex + vec2(0.0, 0.01)) - fry_height(uv_tex - vec2(0.0, 0.01));
+    float h_dx = height_triplanar(sample_p + vec3(0.01, 0.0, 0.0)) - height_triplanar(sample_p - vec3(0.01, 0.0, 0.0));
+    float h_dy = height_triplanar(sample_p + vec3(0.0, 0.01, 0.0)) - height_triplanar(sample_p - vec3(0.0, 0.01, 0.0));
     vec3 bump_normal = normalize(vec3(-h_dx * normal_strength, -h_dy * normal_strength, 1.0));
 
     float macro_z = sqrt(max(0.0, 1.0 - dist * dist));
