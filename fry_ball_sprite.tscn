@@ -1,9 +1,29 @@
-[gd_scene load_steps=321 format=3 uid="uid://bo76bpccjs3g2"]
+[gd_scene load_steps=325 format=3 uid="uid://bo76bpccjs3g2"]
 
 [ext_resource type="Texture2D" uid="uid://dj4hxephwyfk6" path="res://fry_ball_1_spritesheet.png" id="1_c1mvi"]
 [ext_resource type="Texture2D" uid="uid://c0dny5km4qp2t" path="res://rwbj2_0.png" id="1_xdavk"]
 [ext_resource type="Texture2D" uid="uid://dmv2ikvov2fgl" path="res://white-pixel.png" id="2_roaan"]
 [ext_resource type="Texture2D" uid="uid://dmvpafg784ggt" path="res://asteroid_1.png" id="3_4p07n"]
+[ext_resource type="Shader" uid="uid://blk2idmt2ersa" path="res://starfield_background.gdshader" id="4_starfield"]
+[ext_resource type="Texture2D" uid="uid://dq21mhxs61clg" path="res://carrier03_3.png" id="6_p50ru"]
+[ext_resource type="Texture2D" uid="uid://cxpfkko6klces" path="res://SpaceStation_Tileset.png" id="7_vtofp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_starfield"]
+shader = ExtResource("4_starfield")
+shader_parameter/pixel_grid = Vector2(4, 4)
+shader_parameter/density = 0.005
+shader_parameter/twinkle_speed = 0.19
+shader_parameter/twinkle_amount = 0.75
+shader_parameter/base_brightness = 0.08
+shader_parameter/bg_color = Color(0.01, 0.01, 0.02, 1)
+shader_parameter/star_color = Color(0.75, 0.85, 1, 1)
+shader_parameter/glare_strength = 1.1
+shader_parameter/glare_range = 8.0
+shader_parameter/glare_sharpness = 1.6
+shader_parameter/star_threshold_for_glare = 0.7
+shader_parameter/warp_strength_px = 42.19
+shader_parameter/warp_scale = 0.0025
+shader_parameter/layer2_strength = 0.55
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_roaan"]
 atlas = ExtResource("1_c1mvi")
@@ -1760,7 +1780,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 24.0
+"speed": 6.0
 }]
 
 [sub_resource type="Animation" id="Animation_xdavk"]
@@ -1923,7 +1943,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_roaan"]
 resource_name = "fry_ball_growing"
-length = 30.0
+length = 120.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1931,10 +1951,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 30),
-"transitions": PackedFloat32Array(0.3077863, 0.30778614),
+"times": PackedFloat32Array(0, 119.8),
+"transitions": PackedFloat32Array(0.3077863, 0.68302),
 "update": 0,
-"values": [Vector2(0.16233386, 0.16916552), Vector2(2, 2)]
+"values": [Vector2(0.16233386, 0.16916552), Vector2(9.575, 9.575)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p50ru"]
@@ -2301,22 +2321,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_p50ru"]
-resource_name = "asteroid_moving"
-length = 60.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 59.866665),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(204, -171), Vector2(-515, -172)]
-}
-
 [sub_resource type="Animation" id="Animation_vtofp"]
 length = 0.001
 tracks/0/type = "value"
@@ -2332,6 +2336,22 @@ tracks/0/keys = {
 "values": [Vector2(204, -171)]
 }
 
+[sub_resource type="Animation" id="Animation_p50ru"]
+resource_name = "asteroid_moving"
+length = 120.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 119.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(204, -171), Vector2(-515, -172)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xaysi"]
 _data = {
 &"RESET": SubResource("Animation_vtofp"),
@@ -2341,14 +2361,15 @@ _data = {
 [node name="fry_ball_sprite" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_starfield")
 offset_left = -601.0
 offset_top = -347.0
 offset_right = 624.0
 offset_bottom = 351.0
-color = Color(0.1584723, 0.15847233, 0.1584723, 1)
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-242.00003, 14)
 scale = Vector2(0.45990086, 0.4599008)
 texture = ExtResource("1_xdavk")
@@ -2427,8 +2448,8 @@ scale = Vector2(0.034999847, 0.034999847)
 texture = ExtResource("2_roaan")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(335.99997, 306)
-rotation = -0.8236739
+position = Vector2(246, 267.00006)
+rotation = -0.73615766
 amount = 68
 texture = ExtResource("2_roaan")
 lifetime = 1.59
@@ -2455,3 +2476,42 @@ libraries = {
 &"": SubResource("AnimationLibrary_xaysi")
 }
 autoplay = "asteroid_moving"
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(244.00006, 270.00006)
+rotation = 0.087516256
+scale = Vector2(0.8750004, 0.8750004)
+texture = ExtResource("6_p50ru")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(-1119.7573, 1952.2427)
+rotation = -3.1415925
+scale = Vector2(40.015648, 40.015648)
+texture = ExtResource("7_vtofp")
+region_enabled = true
+region_rect = Rect2(144.05737, 0, 31.942627, 31.772774)
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(-11.323238, 2089.6768)
+rotation = 1.5707964
+scale = Vector2(30.091726, 30.091726)
+texture = ExtResource("7_vtofp")
+region_enabled = true
+region_rect = Rect2(144.05737, 0, 31.942627, 31.772774)
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+position = Vector2(1094.6768, 1964.6768)
+rotation = -3.1415925
+scale = Vector2(40.015648, 40.015648)
+texture = ExtResource("7_vtofp")
+region_enabled = true
+region_rect = Rect2(144.05737, 0, 31.942627, 31.772774)
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+position = Vector2(11.592054, -64.641)
+rotation = 1.5707964
+scale = Vector2(17.288113, 19.121948)
+texture = ExtResource("7_vtofp")
+region_enabled = true
+region_rect = Rect2(0, 64, 48, 64)
+metadata/_edit_lock_ = true
