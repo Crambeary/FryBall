@@ -19434,7 +19434,7 @@ curve = SubResource("Curve_xdavk")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xaysi"]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(40.735, 1, 1)
+emission_box_extents = Vector3(85.035, 1, 1)
 direction = Vector3(0, -11.9, 0)
 spread = 1.915
 initial_velocity_min = 278.06
@@ -19448,7 +19448,8 @@ damping_min = 3.0600002
 damping_max = 3.0600002
 damping_curve = SubResource("CurveTexture_vtofp")
 attractor_interaction_enabled = false
-scale_max = 3.0
+scale_min = 6.1099997
+scale_max = 16.31
 scale_curve = SubResource("CurveTexture_qlufu")
 color_ramp = SubResource("GradientTexture1D_xaysi")
 emission_curve = SubResource("CurveTexture_ls1a0")
@@ -19503,6 +19504,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0.31249997, 0.3125)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles2D:amount_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0095]
+}
 
 [sub_resource type="Animation" id="Animation_roaan"]
 resource_name = "fry_ball_growing"
@@ -19521,7 +19534,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("GPUParticles2D:amount")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -19554,6 +19567,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0.31249997, 0.3125), Vector2(17.90625, 17.906252)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles2D:amount_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 8.666667, 19.166666, 27.633331),
+"transitions": PackedFloat32Array(0.6597539, 1, 1, 0.48296815),
+"update": 1,
+"values": [0.3548, 0.7851931, 0.809303, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p50ru"]
@@ -20448,11 +20473,10 @@ texture = ExtResource("2_roaan")
 position = Vector2(246, 267.00006)
 rotation = -0.73615766
 amount = 68
+amount_ratio = 0.0095
 texture = ExtResource("2_roaan")
 lifetime = 1.59
-preprocess = 1.7
 speed_scale = 0.37
-trail_enabled = true
 trail_lifetime = 0.01
 process_material = SubResource("ParticleProcessMaterial_xaysi")
 
