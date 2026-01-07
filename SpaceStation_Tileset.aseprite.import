@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b1hgcpr47g6g5"
+path="res://.godot/imported/SpaceStation_Tileset.aseprite-7e1cd34e49eb1fd3240335a3592ab19c.res"
+
+[deps]
+
+source_file="res://SpaceStation_Tileset.aseprite"
+dest_files=["res://.godot/imported/SpaceStation_Tileset.aseprite-7e1cd34e49eb1fd3240335a3592ab19c.res"]
+
+[params]
+

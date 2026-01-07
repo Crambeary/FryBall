@@ -16,6 +16,10 @@ run/main_scene="uid://bo76bpccjs3g2"
 config/features=PackedStringArray("4.5")
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
