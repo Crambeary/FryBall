@@ -1,11 +1,11 @@
-[gd_scene load_steps=325 format=3 uid="uid://bo76bpccjs3g2"]
+[gd_scene load_steps=330 format=3 uid="uid://bo76bpccjs3g2"]
 
 [ext_resource type="Texture2D" uid="uid://dj4hxephwyfk6" path="res://fry_ball_1_spritesheet.png" id="1_c1mvi"]
 [ext_resource type="Texture2D" uid="uid://c0dny5km4qp2t" path="res://rwbj2_0.png" id="1_xdavk"]
 [ext_resource type="Texture2D" uid="uid://dmv2ikvov2fgl" path="res://white-pixel.png" id="2_roaan"]
 [ext_resource type="Texture2D" uid="uid://dmvpafg784ggt" path="res://asteroid_1.png" id="3_4p07n"]
 [ext_resource type="Shader" uid="uid://blk2idmt2ersa" path="res://starfield_background.gdshader" id="4_starfield"]
-[ext_resource type="Texture2D" uid="uid://dq21mhxs61clg" path="res://carrier03_3.png" id="6_p50ru"]
+[ext_resource type="Texture2D" uid="uid://tv7mxxae5jks" path="res://carrier03_2.png" id="6_vtofp"]
 [ext_resource type="Texture2D" uid="uid://cxpfkko6klces" path="res://SpaceStation_Tileset.png" id="7_vtofp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_starfield"]
@@ -1892,6 +1892,13 @@ _data = {
 &"fly_to": SubResource("Animation_4p07n")
 }
 
+[sub_resource type="Gradient" id="Gradient_vtofp"]
+offsets = PackedFloat32Array(0, 0.3628049, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.41981313, 0.41981313, 0.4198131, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xaysi"]
+gradient = SubResource("Gradient_vtofp")
+
 [sub_resource type="Curve" id="Curve_p50ru"]
 _limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 239.78899, 0, 0, Vector2(0.9774012, 100), -7.980709, 0.0, 0, 0]
@@ -1899,6 +1906,13 @@ point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_vtofp"]
 curve = SubResource("Curve_p50ru")
+
+[sub_resource type="Curve" id="Curve_4iw6f"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ls1a0"]
+curve = SubResource("Curve_4iw6f")
 
 [sub_resource type="Curve" id="Curve_xdavk"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.6752685, 0.0, 0, 0]
@@ -1924,7 +1938,10 @@ damping_min = 3.0600002
 damping_max = 3.0600002
 damping_curve = SubResource("CurveTexture_vtofp")
 attractor_interaction_enabled = false
+scale_max = 3.0
 scale_curve = SubResource("CurveTexture_qlufu")
+color_ramp = SubResource("GradientTexture1D_xaysi")
+emission_curve = SubResource("CurveTexture_ls1a0")
 
 [sub_resource type="Animation" id="Animation_qlufu"]
 length = 0.001
@@ -1939,6 +1956,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [68]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:process_material:spread")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.915]
 }
 
 [sub_resource type="Animation" id="Animation_roaan"]
@@ -1955,6 +1996,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.3077863, 0.68302),
 "update": 0,
 "values": [Vector2(0.16233386, 0.16916552), Vector2(9.575, 9.575)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10.533334, 20.166666, 29.966667, 39.566666, 50.1, 59.9, 69.7, 81.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1.4640859),
+"update": 1,
+"values": [68, 278, 538, 853, 1123, 1583, 1918, 2398, 3683]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:process_material:spread")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 120),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.915, 20.707]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p50ru"]
@@ -2358,6 +2423,11 @@ _data = {
 &"asteroid_moving": SubResource("Animation_p50ru")
 }
 
+[sub_resource type="Environment" id="Environment_bvjrs"]
+glow_enabled = true
+glow_intensity = 1.88
+glow_bloom = 0.55
+
 [node name="fry_ball_sprite" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -2453,11 +2523,10 @@ rotation = -0.73615766
 amount = 68
 texture = ExtResource("2_roaan")
 lifetime = 1.59
-preprocess = 1.8
+preprocess = 1.7
 speed_scale = 0.37
-fixed_fps = 120
 trail_enabled = true
-trail_lifetime = 0.02
+trail_lifetime = 0.01
 process_material = SubResource("ParticleProcessMaterial_xaysi")
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
@@ -2480,8 +2549,8 @@ autoplay = "asteroid_moving"
 [node name="Sprite2D4" type="Sprite2D" parent="."]
 position = Vector2(244.00006, 270.00006)
 rotation = 0.087516256
-scale = Vector2(0.8750004, 0.8750004)
-texture = ExtResource("6_p50ru")
+scale = Vector2(2.1718228, 2.1718228)
+texture = ExtResource("6_vtofp")
 
 [node name="Sprite2D6" type="Sprite2D" parent="."]
 position = Vector2(-1119.7573, 1952.2427)
@@ -2515,3 +2584,6 @@ texture = ExtResource("7_vtofp")
 region_enabled = true
 region_rect = Rect2(0, 64, 48, 64)
 metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bvjrs")
